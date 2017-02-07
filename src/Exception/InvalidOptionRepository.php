@@ -13,7 +13,9 @@
 
 namespace BrightNucleus\OptionsStore\Exception;
 
+use BrightNucleus\Config\ConfigInterface as Config;
 use BrightNucleus\Exception\InvalidArgumentException;
+use Exception;
 
 /**
  * Class InvalidOptionRepository.
@@ -44,6 +46,50 @@ class InvalidOptionRepository extends InvalidArgumentException implements Option
             is_object($repository)
                 ? get_class($repository)
                 : gettype($repository)
+        );
+
+        return new static($message);
+    }
+
+    /**
+     * Get a new exception based on an exception that was thrown during instantiation of a class.
+     *
+     * @since 0.1.4
+     *
+     * @param mixed     $class     Class that was tried to be instantiated.
+     * @param Exception $exception Exception that was thrown during instantiation.
+     *
+     * @return static
+     */
+    public static function fromInstantiationException($class, Exception $exception)
+    {
+        $message = sprintf(
+            'Could not instantiate OptionRepository of type "%1$s". Reason: %2$s',
+            is_object($class)
+                ? get_class($class)
+                : gettype($class),
+            $exception->getMessage()
+        );
+
+        return new static($message, 0, $exception);
+    }
+
+    /**
+     * Get a new exception based on a Config that did not produce a valid repository.
+     *
+     * @since 0.1.0
+     *
+     * @param Config $config Config instance that was used.
+     *
+     * @return static
+     */
+    public static function fromConfig(Config $config)
+    {
+        $message = sprintf(
+            'Could not instantiate OptionRepository from Config with starting key "%1$s".',
+            empty($config->getKeys())
+                ? '<none>'
+                : $config->getKeys()[0]
         );
 
         return new static($message);

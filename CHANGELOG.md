@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.4] - 2017-02-07
+### Added
+- Added `ConfigurableOptionsStore` that accepts a config to set itself up.
+- Added `purge()` method to `IdentityMap` class.
+- Added `Prefixable` interface to make prefixes discoverable.
+
 ## [0.1.3] - 2017-02-07
 ### Changed
 - Removed unneeded `OptionsStore::update()` method.
@@ -21,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release to GitHub.
 
+[0.1.4]: https://github.com/brightnucleus/options-store/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/brightnucleus/options-store/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/brightnucleus/options-store/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/brightnucleus/options-store/compare/v0.1.0...v0.1.1
