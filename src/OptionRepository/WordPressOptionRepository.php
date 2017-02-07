@@ -84,6 +84,7 @@ final class WordPressOptionRepository extends AbstractOptionRepository implement
      */
     protected function writeOption(string $key, $value): bool
     {
-        return update_option($this->prefix . $key, $value);
+        return $value === get_option($this->prefix . $key)
+               || update_option($this->prefix . $key, $value);
     }
 }
