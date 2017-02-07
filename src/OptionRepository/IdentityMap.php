@@ -141,7 +141,7 @@ final class IdentityMap
      *
      * @since 0.1.0
      */
-    public function purge(): void
+    public function purge()
     {
         foreach ($this->map as $key => $value) {
             unset($this->map[$key]);
