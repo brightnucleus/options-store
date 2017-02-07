@@ -14,7 +14,6 @@
 namespace BrightNucleus\OptionsStore\OptionRepository;
 
 use BrightNucleus\OptionsStore\Exception\UnknownOptionKey;
-use BrightNucleus\OptionsStore\Option;
 
 /**
  * Class VolatileOptionRepository.
