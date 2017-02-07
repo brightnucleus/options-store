@@ -4,10 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.6] - 2017-02-07
 ### Changed
-- Implement `OptionRepository::findAll()` and fix `OptionsStore::getAll()`. Props @gmazzap.
+- Implement `OptionRepository::findAll()` and fix `OptionsStore::getAll()`. Props @Giuseppe-Mazzapica.
 
 ### Fixed
-- Fix bug in `WordPressOptionRepository::writeOption()` method. Props @gmazzap.
+- Fix bug in `WordPressOptionRepository::writeOption()` method. Props @Giuseppe-Mazzapica.
 
 ## [0.1.5] - 2017-02-07
 ### Fixed
