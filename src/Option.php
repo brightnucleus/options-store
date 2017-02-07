@@ -36,4 +36,15 @@ interface Option extends Value
      * @return string
      */
     public function getKey(): string;
+
+    /**
+     * Set the raw value.
+     *
+     * @since 0.1.0
+     *
+     * @param mixed $value New raw value.
+     *
+     * @return Option Modified Option object. Can differ from the original one.
+     */
+    public function setValue($value);
 }
