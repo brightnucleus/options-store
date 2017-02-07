@@ -88,20 +88,6 @@ class OptionsStore
     }
 
     /**
-     * Update an existing option.
-     *
-     * @since 0.1.0
-     *
-     * @param Option $option Option with new value.
-     *
-     * @return bool Whether the update was successful.
-     */
-    public function update(Option $option): bool
-    {
-        return $this->repository->save($option);
-    }
-
-    /**
      * Set the value for a specific key.
      *
      * @since 0.1.0
@@ -109,13 +95,13 @@ class OptionsStore
      * @param string $key   Option key to set the value of.
      * @param mixed  $value New value to set the option to.
      *
-     * @return bool Whether the change of value was successful.
+     * @return Option Modified Option object.
      */
-    public function set(string $key, $value): bool
+    public function set(string $key, $value): Option
     {
         $option = $this->repository->find($key);
 
-        return $this->update($option->setValue($value));
+        return $option->setValue($value);
     }
 
     /**
