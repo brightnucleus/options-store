@@ -14,7 +14,7 @@
 namespace BrightNucleus\OptionsStore;
 
 /**
- * Interface OptionsStore.
+ * Class OptionsStore.
  *
  * Central access point for handling options.
  *
