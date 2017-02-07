@@ -118,4 +118,16 @@ class OptionsStoreTest extends \PHPUnit_Framework_TestCase
         $optionB = $this->store->get('test_string');
         $this->assertSame('New String Value', $optionB->getValue());
     }
+
+    /**
+     * Test getting all options.
+     *
+     * @since 0.1.5
+     */
+    public function testGettingAllOptions()
+    {
+        $options = $this->store->getAll();
+        $this->assertInstanceOf(OptionCollection::class, $options);
+        $this->assertCount(2, $options);
+    }
 }

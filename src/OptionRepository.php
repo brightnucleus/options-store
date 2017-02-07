@@ -49,6 +49,15 @@ interface OptionRepository
     public function find(string $key): Option;
 
     /**
+     * Find all options known by the repository.
+     *
+     * @since 0.1.5
+     *
+     * @return OptionCollection Collection of all options.
+     */
+    public function findAll(): OptionCollection;
+
+    /**
      * Save a modified option.
      *
      * @since 0.1.0

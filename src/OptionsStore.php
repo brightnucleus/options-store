@@ -36,15 +36,6 @@ class OptionsStore
     protected $repository;
 
     /**
-     * List of known option keys.
-     *
-     * @since 0.1.0
-     *
-     * @var array<string>
-     */
-    protected $keys = [];
-
-    /**
      * Instantiate an OptionsStore object.
      *
      * @since 0.1.0
@@ -79,12 +70,7 @@ class OptionsStore
      */
     public function getAll(): OptionCollection
     {
-        $options = new OptionCollection\ArrayOptionCollection();
-        foreach ($this->keys as $key) {
-            $options->add($this->repository->find($key));
-        }
-
-        return $options;
+        return $this->repository->findAll();
     }
 
     /**

@@ -16,6 +16,7 @@ namespace BrightNucleus\OptionsStore\OptionRepository;
 use BrightNucleus\OptionsStore\Exception\InvalidOption;
 use BrightNucleus\OptionsStore\Exception\UnknownOptionKey;
 use BrightNucleus\OptionsStore\Option;
+use BrightNucleus\OptionsStore\OptionCollection;
 use BrightNucleus\OptionsStore\OptionRepository;
 
 /**
@@ -137,6 +138,24 @@ abstract class AbstractOptionRepository implements OptionRepository
         $this->identityMap->put($option, $this);
 
         return $option;
+    }
+
+    /**
+     * Find all options known by the repository.
+     *
+     * @since 0.1.5
+     *
+     * @return OptionCollection Collection of all options.
+     */
+    public function findAll(): OptionCollection
+    {
+        $collection = new OptionCollection\ArrayOptionCollection();
+
+        foreach ($this->schema as $key => $value) {
+            $collection->add($this->find($key));
+        }
+
+        return $collection;
     }
 
     /**

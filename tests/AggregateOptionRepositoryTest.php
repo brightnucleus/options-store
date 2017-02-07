@@ -119,4 +119,16 @@ class AggregateOptionRepositoryTest extends \PHPUnit_Framework_TestCase
         $optionB = $this->repository->find('test_string_a');
         $this->assertSame('New String Value', $optionB->getValue());
     }
+
+    /**
+     * Test getting all options.
+     *
+     * @since 0.1.5
+     */
+    public function testGettingAllOptions()
+    {
+        $options = $this->repository->findAll();
+        $this->assertInstanceOf(OptionCollection::class, $options);
+        $this->assertCount(4, $options);
+    }
 }
