@@ -25,7 +25,7 @@ use BrightNucleus\OptionsStore\Exception\UnknownOptionKey;
  * @package BrightNucleus\OptionsStore\OptionRepository
  * @author  Alain Schlesser <alain.schlesser@gmail.com>
  */
-final class WordPressOptionRepository extends AbstractOptionRepository
+final class WordPressOptionRepository extends AbstractOptionRepository implements Prefixable
 {
 
     /**
