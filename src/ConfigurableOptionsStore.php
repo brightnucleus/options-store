@@ -15,6 +15,7 @@ namespace BrightNucleus\OptionsStore;
 
 use BrightNucleus\Config\ConfigInterface as Config;
 use BrightNucleus\Config\ConfigTrait;
+use BrightNucleus\Config\Exception\FailedToProcessConfigException;
 use BrightNucleus\OptionsStore\Exception\InvalidOption;
 use BrightNucleus\OptionsStore\Exception\InvalidOptionRepository;
 use BrightNucleus\OptionsStore\OptionRepository\AggregateOptionRepository;
@@ -41,6 +42,9 @@ class ConfigurableOptionsStore extends OptionsStore
      * @since 0.1.4
      *
      * @param Config $config Config instance to use to configure the repository.
+     *
+     * @throws FailedToProcessConfigException If the Config could not be processed.
+     * @throws InvalidOptionRepository If the repository could not be configured.
      */
     public function __construct(Config $config)
     {
@@ -59,13 +63,14 @@ class ConfigurableOptionsStore extends OptionsStore
      * @param Config $config Config instance to use.
      *
      * @return OptionRepository Option repository that was built from the passed-in repository.
+     * @throws InvalidOptionRepository If the repository could not be configured.
+     * @throws InvalidOptionRepository If the repository could not be instantiated.
      */
     protected function configureRepository(Config $config): OptionRepository
     {
         $repositories = [];
 
         foreach ($config->getAll() as $class => $optionsArray) {
-
             $options = $this->configureOptions((array)$optionsArray);
             try {
                 $repositories[] = new $class($options->getValues());
