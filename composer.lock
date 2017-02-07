@@ -4,50 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d152b006edcc7fb145ce507d59b73fb",
+    "content-hash": "751283f8b0b2f129a436303f3293ac73",
     "packages": [
-        {
-            "name": "brightnucleus/config",
-            "version": "v0.4.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/brightnucleus/config.git",
-                "reference": "c15e27d302e4025e454252858462a1ba2a6ed5f6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/brightnucleus/config/zipball/c15e27d302e4025e454252858462a1ba2a6ed5f6",
-                "reference": "c15e27d302e4025e454252858462a1ba2a6ed5f6",
-                "shasum": ""
-            },
-            "require": {
-                "brightnucleus/exceptions": ">=0.2",
-                "symfony/options-resolver": ">=2.8"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "^1.6",
-                "php-composter/php-composter-phpcs-psr2": "^0.2.0",
-                "phpunit/phpunit": "~4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "BrightNucleus\\Config\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alain Schlesser",
-                    "email": "alain.schlesser@gmail.com"
-                }
-            ],
-            "description": "Minimal, reusable Config component.",
-            "time": "2016-07-22T13:10:05+00:00"
-        },
         {
             "name": "brightnucleus/exceptions",
             "version": "v0.2.5",
@@ -84,6 +42,42 @@
             ],
             "description": "Exceptions shared across Bright Nucleus components.",
             "time": "2016-06-08T09:20:26+00:00"
+        },
+        {
+            "name": "brightnucleus/values",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/brightnucleus/values.git",
+                "reference": "7ba0b6d894304275bfbc065e92e55c54a8026b92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brightnucleus/values/zipball/7ba0b6d894304275bfbc065e92e55c54a8026b92",
+                "reference": "7ba0b6d894304275bfbc065e92e55c54a8026b92",
+                "shasum": ""
+            },
+            "require": {
+                "brightnucleus/exceptions": ">=0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BrightNucleus\\Values\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alain Schlesser",
+                    "email": "alain.schlesser@gmail.com"
+                }
+            ],
+            "description": "Validatable, sanitizable and escapable value objects.",
+            "time": "2017-02-07T11:04:42+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -151,60 +145,6 @@
                 "iterator"
             ],
             "time": "2017-01-03T10:49:41+00:00"
-        },
-        {
-            "name": "symfony/options-resolver",
-            "version": "v3.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "855429e3e9014b9dafee2a667de304c3aaa86fe6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/855429e3e9014b9dafee2a667de304c3aaa86fe6",
-                "reference": "855429e3e9014b9dafee2a667de304c3aaa86fe6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\OptionsResolver\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony OptionsResolver Component",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "config",
-                "configuration",
-                "options"
-            ],
-            "time": "2017-01-02T20:32:22+00:00"
         }
     ],
     "packages-dev": [
