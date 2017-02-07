@@ -133,4 +133,18 @@ final class IdentityMap
 
         return $option;
     }
+
+    /**
+     * Purge the identity map.
+     *
+     * All references to existing option objects will be removed.
+     *
+     * @since 0.1.0
+     */
+    public function purge(): void
+    {
+        foreach ($this->map as $key => $value) {
+            unset($this->map[$key]);
+        }
+    }
 }
