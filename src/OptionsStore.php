@@ -92,14 +92,13 @@ class OptionsStore
      *
      * @since 0.1.0
      *
-     * @param Option $option  Option with new value.
-     * @param bool   $persist Whether to immediately persist the change.
+     * @param Option $option Option with new value.
      *
      * @return bool Whether the update was successful.
      */
-    public function update(Option $option, bool $persist = true): bool
+    public function update(Option $option): bool
     {
-
+        return $this->repository->save($option);
     }
 
     /**
@@ -107,15 +106,16 @@ class OptionsStore
      *
      * @since 0.1.0
      *
-     * @param string $key     Option key to set the value of.
-     * @param mixed  $value   New value to set the option to.
-     * @param bool   $persist Whether to immediately persist the change.
+     * @param string $key   Option key to set the value of.
+     * @param mixed  $value New value to set the option to.
      *
      * @return bool Whether the change of value was successful.
      */
-    public function set(string $key, $value, bool $persist = true): bool
+    public function set(string $key, $value): bool
     {
+        $option = $this->repository->find($key);
 
+        return $this->update($option->setValue($value));
     }
 
     /**
