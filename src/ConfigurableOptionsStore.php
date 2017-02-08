@@ -71,14 +71,10 @@ class ConfigurableOptionsStore extends OptionsStore
     {
         $repositories = [];
 
-        $prefix = '';
-
         foreach ($config->getAll() as $class => $optionsArray) {
-            if ($class === OptionRepository::PREFIX) {
-                $prefix = (string)$optionsArray;
-                continue;
-            }
-
+            $prefix = array_key_exists(OptionRepository::PREFIX, $optionsArray)
+                ? $optionsArray[OptionRepository::PREFIX]
+                : '';
             $options = $this->configureOptions((array)$optionsArray);
 
             try {
@@ -113,7 +109,11 @@ class ConfigurableOptionsStore extends OptionsStore
     protected function configureOptions(array $optionsArray): OptionCollection
     {
         $options = new OptionCollection\ArrayOptionCollection();
-        foreach ($optionsArray as $option) {
+        foreach ($optionsArray as $key => $option) {
+            if ($key === OptionRepository::PREFIX) {
+                continue;
+            }
+
             if ($option instanceof Option) {
                 $options->add($option);
                 continue;
