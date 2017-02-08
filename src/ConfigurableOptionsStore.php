@@ -19,6 +19,7 @@ use BrightNucleus\Config\Exception\FailedToProcessConfigException;
 use BrightNucleus\OptionsStore\Exception\InvalidOption;
 use BrightNucleus\OptionsStore\Exception\InvalidOptionRepository;
 use BrightNucleus\OptionsStore\OptionRepository\AggregateOptionRepository;
+use BrightNucleus\OptionsStore\OptionRepository\Prefixable;
 use Exception;
 
 /**
@@ -70,10 +71,19 @@ class ConfigurableOptionsStore extends OptionsStore
     {
         $repositories = [];
 
+        $prefix = '';
+
         foreach ($config->getAll() as $class => $optionsArray) {
+            if ($class === OptionRepository::PREFIX) {
+                $prefix = (string)$optionsArray;
+            }
+
             $options = $this->configureOptions((array)$optionsArray);
+
             try {
-                $repositories[] = new $class($options->getValues());
+                $repositories[] = $this->isPrefixable($class)
+                    ? new $class($prefix, $options->getValues())
+                    : new $class($options->getValues());
             } catch (Exception $exception) {
                 throw InvalidOptionRepository::fromInstantiationException($class, $exception);
             }
@@ -124,5 +134,27 @@ class ConfigurableOptionsStore extends OptionsStore
         }
 
         return $options;
+    }
+
+    /**
+     * Check whether a FQCN or an object implements the Prefixable interface.
+     *
+     * @since 0.1.0
+     *
+     * @param OptionRepository|string $objectOrClassName Object instance or FQCN.
+     *
+     * @return bool Whether the passed-in argument is prefixable.
+     */
+    protected function isPrefixable($objectOrClassName): bool
+    {
+        if (is_string($objectOrClassName)) {
+            return in_array(Prefixable::class, class_implements($objectOrClassName), true);
+        }
+
+        if (is_object($objectOrClassName)) {
+            return $objectOrClassName instanceof Prefixable;
+        }
+
+        return false;
     }
 }

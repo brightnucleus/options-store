@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.7] - 2017-02-08
+### Added
+- Implement mechanism to detect a prefix passed-in through the config array.
+
 ## [0.1.6] - 2017-02-07
 ### Changed
 - Implement `OptionRepository::findAll()` and fix `OptionsStore::getAll()`. Props [@Giuseppe-Mazzapica](https://github.com/Giuseppe-Mazzapica).
@@ -38,6 +42,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release to GitHub.
 
+[0.1.7]: https://github.com/brightnucleus/options-store/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/brightnucleus/options-store/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/brightnucleus/options-store/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/brightnucleus/options-store/compare/v0.1.3...v0.1.4

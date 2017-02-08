@@ -27,6 +27,11 @@ interface OptionRepository
 {
 
     /**
+     * Key used in the config to denote a prefix to be used for each of the options.
+     */
+    const PREFIX = 'prefix';
+
+    /**
      * Check whether the repository contains a given key.
      *
      * @since 0.1.0
