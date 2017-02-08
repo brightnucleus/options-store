@@ -76,6 +76,7 @@ class ConfigurableOptionsStore extends OptionsStore
         foreach ($config->getAll() as $class => $optionsArray) {
             if ($class === OptionRepository::PREFIX) {
                 $prefix = (string)$optionsArray;
+                continue;
             }
 
             $options = $this->configureOptions((array)$optionsArray);
