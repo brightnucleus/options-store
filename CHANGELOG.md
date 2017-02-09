@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.1.10] - 2017-02-09
 ### Fixed
 - Fix relation between default values and persistence.
+- Make VolatileOptionRepository _more_ volatile, to fix unit tests.
 
 ## [0.1.9] - 2017-02-08
 ### Fixed

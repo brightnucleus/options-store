@@ -30,11 +30,11 @@ class ConfigurableOptionsStoreTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Tear down existing data structures after each test.
+     * Purge existing data structures before each test.
      *
      * @since 0.1.4
      */
-    public function tearDown()
+    public function setUp()
     {
         IdentityMap::getInstance()->purge();
     }

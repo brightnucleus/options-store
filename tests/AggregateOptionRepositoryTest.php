@@ -15,6 +15,7 @@ namespace BrightNucleus\OptionsStore;
 
 use BrightNucleus\OptionsStore\Option;
 use BrightNucleus\OptionsStore\OptionRepository\AggregateOptionRepository;
+use BrightNucleus\OptionsStore\OptionRepository\IdentityMap;
 use BrightNucleus\OptionsStore\OptionRepository\VolatileOptionRepository;
 
 /**
@@ -44,6 +45,8 @@ class AggregateOptionRepositoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
+
+        IdentityMap::getInstance()->purge();
 
         $this->repository = new AggregateOptionRepository(
             [

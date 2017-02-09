@@ -36,7 +36,7 @@ final class VolatileOptionRepository extends AbstractOptionRepository
      *
      * @var array
      */
-    private static $storage = [];
+    private $storage = [];
 
     /**
      * Read a single option from the persistence mechanism.
@@ -51,7 +51,7 @@ final class VolatileOptionRepository extends AbstractOptionRepository
      */
     protected function readOption(string $key, $fallback = null)
     {
-        return static::$storage[$key] ?? $fallback;
+        return $this->storage[$key] ?? $fallback;
     }
 
     /**
@@ -66,7 +66,7 @@ final class VolatileOptionRepository extends AbstractOptionRepository
      */
     protected function writeOption(string $key, $value): bool
     {
-        static::$storage[$key] = $value;
+        $this->storage[$key] = $value;
 
         return true;
     }

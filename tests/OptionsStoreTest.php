@@ -14,6 +14,7 @@
 namespace BrightNucleus\OptionsStore;
 
 use BrightNucleus\OptionsStore\Option;
+use BrightNucleus\OptionsStore\OptionRepository\IdentityMap;
 use BrightNucleus\OptionsStore\OptionRepository\VolatileOptionRepository;
 
 /**
@@ -43,6 +44,8 @@ class OptionsStoreTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
+
+        IdentityMap::getInstance()->purge();
 
         $this->store = new OptionsStore(
             new VolatileOptionRepository(
