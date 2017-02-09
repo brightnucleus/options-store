@@ -121,9 +121,13 @@ abstract class AbstractOptionRepository implements OptionRepository
         if (! $this->has($key)) {
             throw UnknownOptionKey::fromKey($key);
         }
-
         if ($this->identityMap->has($key)) {
-            return $this->identityMap->getOption($key);
+            $option = $this->identityMap->getOption($key);
+            if (isset($this->values[$key])
+                && $option->getValue() !== $this->values[$key]
+            ) {
+                $option->setValue($this->values[$key], false);
+            }
         }
 
         $class = get_class($this->schema[$key]);
@@ -202,8 +206,8 @@ abstract class AbstractOptionRepository implements OptionRepository
      *
      * @since 0.1.0
      *
-     * @param string $key      Key of the option to read.
-     * @param mixed  $fallback Optional. Fallback value to use if the option was not found.
+     * @param string $key Key of the option to read.
+     * @param mixed $fallback Optional. Fallback value to use if the option was not found.
      *
      * @return mixed Value that was read.
      * @throws UnknownOptionKey If the value could not be retrieved.
@@ -215,8 +219,8 @@ abstract class AbstractOptionRepository implements OptionRepository
      *
      * @since 0.1.0
      *
-     * @param string $key   Key of the option to write.
-     * @param mixed  $value Value to write.
+     * @param string $key Key of the option to write.
+     * @param mixed $value Value to write.
      *
      * @return bool Whether the write operation was successful.
      */

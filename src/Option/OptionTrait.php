@@ -55,13 +55,19 @@ trait OptionTrait
      *
      * @since 0.1.0
      *
-     * @param mixed $value New raw value.
+     * @param mixed $value   New raw value.
+     * @param bool  $persist Optional. Whether to immediately persist the value.
      *
      * @return Option Modified Option object. Can differ from the original one.
      */
-    public function setValue($value)
+    public function setValue($value, $persist = true)
     {
         $this->value = $value;
+
+        if (! $persist ) {
+            return $this;
+        }
+
         $repository  = IdentityMap::getInstance()->getRepository($this->key);
         $repository->save($this);
 
