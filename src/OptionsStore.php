@@ -48,6 +48,20 @@ class OptionsStore
     }
 
     /**
+     * Register the options repository with the system.
+     *
+     * Can be overridden by implementations that need to be registered before
+     * first use.
+     *
+     * @since 0.1.11
+     *
+     * @return void
+     */
+    public function register() {
+        // Not needed for this implementation.
+    }
+
+    /**
      * Get a specific option.
      *
      * @since 0.1.0
