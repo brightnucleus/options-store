@@ -62,6 +62,20 @@ class OptionsStore
     }
 
     /**
+     * Check whether a given option exists.
+     *
+     * @since 0.1.11
+     *
+     * @param string $key Option key to check.
+     *
+     * @return bool Whether the option key exists.
+     */
+    public function has(string $key): bool
+    {
+        return $this->repository->has($key);
+    }
+
+    /**
      * Get a specific option.
      *
      * @since 0.1.0
@@ -114,5 +128,25 @@ class OptionsStore
     public function persist(): bool
     {
         return $this->repository->persist();
+    }
+
+    /**
+     * Allow options to be directly invoked.
+     *
+     * @since 0.3.1
+     *
+     * @param string $method    Method that was called on the view.
+     * @param array  $arguments Array of arguments that were passed to the
+     *                          method.
+     *
+     * @return mixed Return value of the invoked object or callable.
+     */
+    public function __call($method, $arguments)
+    {
+        if ($this->repository->has($method)) {
+            $option = $this->repository->find($method);
+
+            return $option(...$arguments);
+        }
     }
 }
