@@ -121,6 +121,7 @@ abstract class AbstractOptionRepository implements OptionRepository
         if (! $this->has($key)) {
             throw UnknownOptionKey::fromKey($key);
         }
+
         if ($this->identityMap->has($key)) {
             $option = $this->identityMap->getOption($key);
             if (isset($this->values[$key])
