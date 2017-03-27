@@ -15,6 +15,14 @@ namespace BrightNucleus\OptionsStore;
 
 use Doctrine\Common\Collections\Collection;
 
+/**
+ * Interface OptionCollection.
+ *
+ * @since   0.1.11
+ *
+ * @package BrightNucleus\OptionsStore
+ * @author  Alain Schlesser <alain.schlesser@gmail.com>
+ */
 interface OptionCollection extends Collection
 {
 

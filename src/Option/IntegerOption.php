@@ -38,10 +38,11 @@ class IntegerOption extends IntegerValue implements Option
      *
      * @param string $key   Key of the option.
      * @param int    $value Default value of the option.
+     * @param int    $flags Optional. Bitwise flags to define behaviour.
      */
-    public function __construct(string $key, int $value)
+    public function __construct(string $key, int $value, int $flags = 0)
     {
         $this->key = $key;
-        parent::__construct($value);
+        parent::__construct($value, $flags);
     }
 }

@@ -16,14 +16,14 @@ namespace BrightNucleus\OptionsStore\ValidationError;
 use BrightNucleus\OptionsStore\ValidationError;
 
 /**
- * Class EmailAddressValidationError.
+ * Class StringValidationError.
  *
  * @since   0.1.11
  *
  * @package BrightNucleus\Values
  * @author  Alain Schlesser <alain.schlesser@gmail.com>
  */
-final class EmailAddressValidationError implements ValidationError
+final class StringValidationError implements ValidationError
 {
 
     use ValidationErrorTrait;
@@ -38,7 +38,7 @@ final class EmailAddressValidationError implements ValidationError
     private function getDefaultMessage()
     {
         return sprintf(
-            'You need to provide a valid email address for option "%1$s".',
+            'You need to provide a valid text string for option "%1$s".',
             $this->option->getKey()
         );
     }

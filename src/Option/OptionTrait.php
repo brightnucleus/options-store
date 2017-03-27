@@ -15,6 +15,8 @@ namespace BrightNucleus\OptionsStore\Option;
 
 use BrightNucleus\OptionsStore\Option;
 use BrightNucleus\OptionsStore\OptionRepository\IdentityMap;
+use BrightNucleus\Values\Exception\FailedToValidate;
+use BrightNucleus\Values\Value;
 
 /**
  * Trait OptionTrait.
@@ -37,6 +39,24 @@ trait OptionTrait
      * @var string
      */
     protected $key;
+
+    /**
+     * Option name that is displayed to the user.
+     *
+     * @since 0.1.11
+     *
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Internal representation of the value.
+     *
+     * @since 0.1.11
+     *
+     * @var mixed
+     */
+    protected $value;
 
     /**
      * Get the identifier key of the option.
@@ -62,6 +82,18 @@ trait OptionTrait
      */
     public function setValue($value, $persist = true)
     {
+        if ($this->isEmpty($value) && ! $this->flags & Value::CAN_BE_EMPTY) {
+            throw FailedToValidate::fromValue($value, $this);
+        }
+
+        if (! $this->isEmpty($value)) {
+            $value = $this->validate($value);
+        }
+
+        if (null === $value) {
+            throw FailedToValidate::fromValue($value, $this);
+        }
+
         $this->value = $value;
 
         if (! $persist ) {

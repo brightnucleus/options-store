@@ -118,29 +118,32 @@ abstract class AbstractOptionRepository implements OptionRepository
      */
     public function find(string $key): Option
     {
+        // Error out if option is not found in schema.
         if (! $this->has($key)) {
             throw UnknownOptionKey::fromKey($key);
         }
 
-        if ($this->identityMap->has($key)) {
-            $option = $this->identityMap->getOption($key);
-            if (isset($this->values[$key])
-                && $option->getValue() !== $this->values[$key]
-            ) {
-                $option->setValue($this->values[$key], false);
-            }
+        // If we already had instantiated the option, we need to make sure to use the same reference, to keep all
+        // consumers in sync.
+        if (! $this->identityMap->has($key)) {
+            // We don't have an instance in our identity map yet, so we clone one from our schema.
+            $option = clone $this->schema[$key];
+            $this->identityMap->put($option, $this);
+        }
+        $option = $this->identityMap->getOption($key);
+
+        // Retrieve the value from persistence, while falling back to the default value if no persisted one was found.
+        // Then, cache the value so that we only hit the persistent storage once.
+        if (! isset($this->values[$key])) {
+            $this->values[$key] = $this->readOption($key, $this->schema[$key]->getValue() ?? null);
         }
 
-        $class = get_class($this->schema[$key]);
-
-        if (array_key_exists($key, $this->values)) {
-            return new $class($key, $this->values[$key]);
+        // Keep the value of the option up-to-date with latest changes.
+        if (isset($this->values[$key])
+            && $option->getValue() !== $this->values[$key]
+        ) {
+            $option->setValue($this->values[$key], $persist = false);
         }
-
-        $value = $this->readOption($key, $this->schema[$key]->getValue() ?? null);
-
-        $option = new $class($key, $value);
-        $this->identityMap->put($option, $this);
 
         return $option;
     }
@@ -180,7 +183,7 @@ abstract class AbstractOptionRepository implements OptionRepository
             throw UnknownOptionKey::fromKey($key);
         }
 
-        $this->values[$key] = $option->getValue();
+        $this->values[$key] = $option->sanitize();
 
         return $this->persist();
     }
@@ -207,8 +210,8 @@ abstract class AbstractOptionRepository implements OptionRepository
      *
      * @since 0.1.0
      *
-     * @param string $key Key of the option to read.
-     * @param mixed $fallback Optional. Fallback value to use if the option was not found.
+     * @param string $key      Key of the option to read.
+     * @param mixed  $fallback Optional. Fallback value to use if the option was not found.
      *
      * @return mixed Value that was read.
      * @throws UnknownOptionKey If the value could not be retrieved.
@@ -220,8 +223,8 @@ abstract class AbstractOptionRepository implements OptionRepository
      *
      * @since 0.1.0
      *
-     * @param string $key Key of the option to write.
-     * @param mixed $value Value to write.
+     * @param string $key   Key of the option to write.
+     * @param mixed  $value Value to write.
      *
      * @return bool Whether the write operation was successful.
      */

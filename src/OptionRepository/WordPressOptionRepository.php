@@ -13,8 +13,6 @@
 
 namespace BrightNucleus\OptionsStore\OptionRepository;
 
-use BrightNucleus\OptionsStore\Exception\UnknownOptionKey;
-
 /**
  * Class WordPressOptionRepository.
  *
@@ -60,13 +58,12 @@ final class WordPressOptionRepository extends AbstractOptionRepository implement
      * @param mixed  $fallback Optional. Fallback value to use if the option was not found.
      *
      * @return mixed Value that was read.
-     * @throws UnknownOptionKey If the value could not be retrieved.
      */
     protected function readOption(string $key, $fallback = null)
     {
-        $value = get_option($this->prefix . $key, $fallback ?: false);
+        $value = get_option($this->prefix . $key, $fallback ?? false);
         if (false === $value) {
-            throw UnknownOptionKey::fromKey($key);
+            return $fallback;
         }
 
         return $value;

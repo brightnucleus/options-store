@@ -1,17 +1,19 @@
 <?php
 /**
- * Bright Nucleus Values.
+ * Bright Nucleus Options Store.
  *
- * Manipulate sanitizable and validatable values.
+ * Abstract options store that allows for exchangeable persistence mechanisms.
  *
- * @package   BrightNucleus\Values
+ * @package   BrightNucleus\OptionsStore
  * @author    Alain Schlesser <alain.schlesser@gmail.com>
  * @license   MIT
  * @link      https://www.brightnucleus.com/
  * @copyright 2017 Alain Schlesser, Bright Nucleus
  */
 
-namespace BrightNucleus\Values\ValidationError;
+namespace BrightNucleus\OptionsStore\ValidationError;
+
+use BrightNucleus\OptionsStore\Option;
 
 /**
  * Class ValidationErrorTrait.
@@ -24,13 +26,13 @@ namespace BrightNucleus\Values\ValidationError;
 trait ValidationErrorTrait
 {
     /**
-     * Key of the option that was not valid.
+     * Option that was not valid.
      *
      * @since 0.1.1
      *
      * @var string
      */
-    private $key;
+    private $option;
 
     /**
      * Message describing the requirement.
@@ -46,25 +48,25 @@ trait ValidationErrorTrait
      *
      * @since 0.1.0
      *
-     * @param string      $key     Key of the option that was not valid.
+     * @param Option      $option  Option that was not valid.
      * @param string|null $message Optional. Message describing the requirement.
      */
-    public function __construct(string $key, string $message = null)
+    public function __construct(Option $option, string $message = null)
     {
-        $this->key     = $key;
+        $this->option  = $option;
         $this->message = $message ?? $this->getDefaultMessage();
     }
 
     /**
-     * Get the key of the option that was not valid.
+     * Get the option that was not valid.
      *
      * @since 0.1.1
      *
-     * @return string Message describing the requirement.
+     * @return string Option that was not valid.
      */
-    public function getKey()
+    public function getOption()
     {
-        return $this->key;
+        return $this->option;
     }
 
     /**
@@ -89,8 +91,9 @@ trait ValidationErrorTrait
     private function getDefaultMessage()
     {
         return sprintf(
-            'The value provided for option "%1$s" was not valid.',
-            $this->key
+            'The value "%1$s" provided for option "%2$s" was not valid.',
+            $this->option->getName(),
+            $this->option->getKey()
         );
     }
 }

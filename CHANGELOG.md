@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.11] - 2017-03-27
+### Fixed
+- Fix handling of default values.
+- Improve sanitization handling.
+
 ## [0.1.10] - 2017-02-09
 ### Fixed
 - Fix relation between default values and persistence.
@@ -55,6 +60,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release to GitHub.
 
+[0.1.11]: https://github.com/brightnucleus/options-store/compare/v0.1.10...v0.1.11
 [0.1.10]: https://github.com/brightnucleus/options-store/compare/v0.1.9...v0.1.10
 [0.1.9]: https://github.com/brightnucleus/options-store/compare/v0.1.8...v0.1.9
 [0.1.8]: https://github.com/brightnucleus/options-store/compare/v0.1.7...v0.1.8

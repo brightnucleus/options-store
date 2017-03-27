@@ -14,25 +14,27 @@
 namespace BrightNucleus\OptionsStore\Option;
 
 use BrightNucleus\OptionsStore\Option;
-use BrightNucleus\Values\Value\StringValue;
+use BrightNucleus\OptionsStore\ValidationError;
+use BrightNucleus\OptionsStore\ValidationError\EmailAddressValidationError;
+use BrightNucleus\Values\Value\EmailAddressValue;
 
 /**
- * Class StringOption.
+ * Class EmailAddressOption.
  *
- * Option interface wrapped around a StringValue object.
+ * Option interface wrapped around an EmailAddressValue object.
  *
  * @since   0.1.0
  *
  * @package BrightNucleus\OptionsStore
  * @author  Alain Schlesser <alain.schlesser@gmail.com>
  */
-class StringOption extends StringValue implements Option
+class EmailAddressOption extends EmailAddressValue implements Option
 {
 
     use OptionTrait;
 
     /**
-     * Instantiate a StringOption object.
+     * Instantiate a EmailAddressOption object.
      *
      * @since 0.1.0
      *
@@ -44,5 +46,24 @@ class StringOption extends StringValue implements Option
     {
         $this->key = $key;
         parent::__construct($value, $flags);
+    }
+
+    /**
+     * Return the validated form of the value.
+     *
+     * Returns null if the value could not be validated.
+     *
+     * @since 0.1.11
+     *
+     * @param mixed $value Value to validate.
+     *
+     * @return mixed|ValidationError Validated value. ValidationError instance if validation failed.
+     */
+    public function validate($value)
+    {
+        $result = parent::validate($value);
+        return null === $result
+            ? new EmailAddressValidationError($this)
+            : $result;
     }
 }
