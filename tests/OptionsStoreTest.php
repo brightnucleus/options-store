@@ -13,7 +13,7 @@
 
 namespace BrightNucleus\OptionsStore;
 
-use BrightNucleus\OptionsStore\Option;
+use PHPUnit\Framework\TestCase;
 use BrightNucleus\OptionsStore\OptionRepository\IdentityMap;
 use BrightNucleus\OptionsStore\OptionRepository\VolatileOptionRepository;
 
@@ -24,7 +24,7 @@ use BrightNucleus\OptionsStore\OptionRepository\VolatileOptionRepository;
  *
  * @author Alain Schlesser <alain.schlesser@gmail.com>
  */
-class OptionsStoreTest extends \PHPUnit_Framework_TestCase
+class OptionsStoreTest extends TestCase
 {
 
     /**
